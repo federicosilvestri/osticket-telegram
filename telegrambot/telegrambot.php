@@ -46,7 +46,7 @@ class TelegramPlugin extends Plugin {
             global $ost;
 
             $data_string = utf8_encode(json_encode($payload));
-            $url = $this->getConfig()->get('telegram-webhook-url');
+            $url = $this->getConfig()->get('telegram-webhook-url') . '/sendMessage';
 
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
