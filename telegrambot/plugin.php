@@ -8,6 +8,14 @@ return array(
     'description' =>    'Notify Telegram on new ticket.',
     'url' =>            'https://github.com/federicosilvestri/osticket-telegram',
     'plugin' =>         'telegrambot.php:TelegramPlugin',
+    'requires' => array(
+        'php-curl' => array (
+            'version' => '*',
+            'map' => array (
+              'php-curl' => 'include'  
+            ),
+        ),
+    )
 );
 
 ?>
