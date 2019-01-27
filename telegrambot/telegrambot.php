@@ -40,7 +40,7 @@ class TelegramPlugin extends Plugin {
 		);
 	}
 
-	function sendToTelegram($payload)
+	private function sendToTelegram($payload)
     {
         try {
             global $ost;
@@ -64,17 +64,17 @@ class TelegramPlugin extends Plugin {
                 $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
                 if ($statusCode != '200') {
-                    throw new Exception($url . ' Http code: ' . $statusCode);
+                    throw new Exception($url . ' HTTP response code: ' . $statusCode);
                 }
             }
-
-            curl_close($ch);
         } catch(Exception $e) {
             error_log('Error posting to Telegram. '. $e->getMessage());
-        }
+        } finally {
+			curl_close($ch);
+		}
     }
 
-    function escapeText($text)
+    private function escapeText($text)
     {
         $text = str_replace('&', '&amp;', $text);
         $text = str_replace('<', '&lt;', $text);
